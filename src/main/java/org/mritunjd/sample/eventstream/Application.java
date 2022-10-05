@@ -1,4 +1,4 @@
-package org.mritunjd.sample;
+package org.mritunjd.sample.eventstream;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

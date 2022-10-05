@@ -1,47 +1,7 @@
 version: '3'
 services:
-  zookeeper:
-    build:
-      context: ./kafka
-    container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-    command: /kafka/bin/zookeeper-server-start.sh /kafka/config/zookeeper.properties
-
-  kafka1:
-    build:
-      context: ./kafka
-    container_name: kafka1
-    command: >
-      /kafka/bin/kafka-server-start.sh /kafka/config/server.properties
-      --override zookeeper.connect=zookeeper:2181
-      --override listeners=PLAINTEXT://0.0.0.0:9093
-      --override advertised.listeners=PLAINTEXT://kafka1:9093
-      --override broker.id=1
-    depends_on:
-      - zookeeper
-
-  kafka2:
-    build:
-      context: ./kafka
-    container_name: kafka2
-    command: >
-      /kafka/bin/kafka-server-start.sh /kafka/config/server.properties
-            --override zookeeper.connect=zookeeper:2181
-            --override listeners=PLAINTEXT://0.0.0.0:9094
-            --override advertised.listeners=PLAINTEXT://kafka2:9094
-            --override broker.id=2
-    depends_on:
-      - zookeeper
-
-  app:
-    build:
-      context: .
-    container_name: app
-    environment:
-      BOOTSTRAP_SERVERS: kafka1:9093,kafka2:9094
+  mongo:
+    image: mongo:latest
+    container_name: mongo
     ports:
-      - 8083:8080
-    depends_on:
-      - kafka1
-      - kafka2
+      - 27017:27017
