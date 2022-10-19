@@ -28,7 +28,7 @@ repositories {
 }
 
 springBoot{
-    mainClassName = 'org.mritunjd.sample.eventstream.Application'
+    mainClassName = 'org.mritunjd.sample.Application'
 }
 
 dependencies {
